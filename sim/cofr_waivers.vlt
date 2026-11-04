@@ -1,0 +1,22 @@
+// Scoped lint waivers for our OWN continuant-coprocessor RTL.
+//
+// Policy: width / unsigned / truncation / latch findings are FIXED in the RTL,
+// never waived (they can hide real bugs). This file waives only UNOPTFLAT, and
+// only for the reason below.
+//
+// UNOPTFLAT on the combinational scan / gradient datapaths: these fold a 2x2
+// transfer matrix (or a gradient) as a strictly feed-forward chain that passes
+// stage k-1 -> stage k through an unpacked array. The scheduler analyses each
+// array as a single node and, because the chain also threads through the
+// HardFloat decode blocks, reports "circular combinational logic" on a signal
+// deep inside HardFloat (e.g. recFNToFN d_p01.sign). It is NOT a real loop:
+//   * different array ELEMENTS are read vs written each stage, and
+//   * the Yosys synthesis dry-run (docs/SYNTHESIS_DRYRUN.md) maps every module
+//     with no combinational-loop error -- independent confirmation.
+// UNOPTFLAT does not affect simulation correctness (Verilator still settles the
+// logic); it is a scheduling/optimization hint. split_var declines to split the
+// arrays on this tool version, and the loop representative lands in third-party
+// files, so a rule-level waiver is the clean option. Every other lint rule stays
+// fatal for our RTL.
+`verilator_config
+lint_off -rule UNOPTFLAT

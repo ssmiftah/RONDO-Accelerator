@@ -1,0 +1,170 @@
+// Waivers added with the chip-interface core changes (CHIP_INTERFACE_SPEC 2.1, 17-T7).
+//
+// The core changes C1-C7 add ports to fused_coproc_pipe, ladder_engine_inter,
+// recip_nr_pipe and affine_bank_pipe. Existing instantiations (written before the
+// change) leave the new ports unconnected on purpose: new inputs are ignored unless
+// their gating parameter is set and new outputs do not affect behavior. Verilator
+// reports that as PINMISSING. It is waived here only for those existing instantiating
+// files, never for the new rtl/chip/* sources or the new chip testbenches.
+`verilator_config
+lint_off -rule PINMISSING -file "*rtl/core/*.v"
+lint_off -rule PINMISSING -file "*rtl/board/*.v"
+lint_off -rule PINMISSING -file "*/sim/tb_fused_power.v"
+lint_off -rule PINMISSING -file "*/sim/tb_fused_power_bf16.v"
+lint_off -rule PINMISSING -file "*/sim/tb_coproc_power.v"
+lint_off -rule PINMISSING -file "*/sim/tb_kan_power.v"
+lint_off -rule PINMISSING -file "*/sim/tb_kan_power_bf16.v"
+lint_off -rule PINMISSING -file "*/sim/tb_kscan_power.v"
+lint_off -rule PINMISSING -file "*/sim/tb_genesys2_array.v"
+lint_off -rule PINMISSING -file "*/sim/tb_genesys2_top.v"
+lint_off -rule PINMISSING -file "*/sim_build_chip/*/fused_coproc_pipe_old.v"
+// ICG cell model: the transparent-low latch is the intended structure (substituted by a library ICG cell)
+lint_off -rule LATCH -file "*rondo_icg.v"
+
+// ---- -Wall findings in the chip RTL (T-LINT): each waiver is scoped to the files named and justified ----
+// BLKSEQ: blocking temporaries (err_new, honor_*, nmsk, ...) used only inside the same clocked block to build the next-state
+// value of nonblocking registers; never read by another block.
+lint_off -rule BLKSEQ -file "*rondo_regs.v"
+lint_off -rule BLKSEQ -file "*rondo_wpack.v"
+lint_off -rule BLKSEQ -file "*rondo_spi_ctrl.v"
+// (UNUSEDSIGNAL / UNUSEDPARAM for rtl/chip: per-signal entries at the end of this file)
+// the existing core modules gain ports whose consumers exist only for some parameter settings (EXT_MEM=1 ignores the load
+// port and the internal memories, EXT_MEM=0 ignores wm_q/bm_q, DBG=0 ignores the dbg_* selects): unused by construction.
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/affine_bank_pipe.v"
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/recip_nr_pipe.v"
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/ladder_engine_inter.v"
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/fp_fma_pipe.v"
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/fused_coproc_pipe.v"
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/ladder_scan_inter.v"
+lint_off -rule UNUSEDSIGNAL -file "*rtl/core/kan_*.v"
+// outputs deliberately left unconnected (guard_hit/dbg of lanes in builds that do not use them, inReady that is constant 1)
+lint_off -rule PINCONNECTEMPTY -file "*rtl/chip/rondo_dev.v"
+lint_off -rule PINCONNECTEMPTY -file "*rtl/chip/rondo_chip_top.v"
+lint_off -rule PINCONNECTEMPTY -file "*rtl/chip/rondo_layers.v"
+lint_off -rule PINCONNECTEMPTY -file "*rtl/core/ladder_engine_inter.v"
+// SYNCASYNCNET: the reset synchronizer output is by design both a synchronous flop output and the asynchronous reset of the
+// core; rondo_seq's layer-state flops feed both reset and clock-enable logic.
+lint_off -rule SYNCASYNCNET -file "*rondo_reset_sync.v"
+// pre-existing core: genvar kept for symmetry (kan_layer_pipe); nReset is both an async reset and sampled by the C6 lane-mask flop
+lint_off -rule UNUSEDGENVAR -file "*rtl/core/kan_layer_pipe.v"
+lint_off -rule SYNCASYNCNET -file "*rtl/core/affine_bank_pipe.v"
+lint_off -rule SYNCASYNCNET -file "*rtl/core/fused_coproc_pipe.v"
+
+// T-EQ bench (sim/tb_core_eq.v, CHIP_FIX_PLAN 0.3): instantiates the cores with only the legacy ports (new ports unused on purpose) and
+// indexes a few regs with integer loop variables.
+lint_off -rule PINMISSING -file "*/sim/tb_core_eq.v"
+lint_off -rule WIDTHTRUNC -file "*/sim/tb_core_eq.v"
+lint_off -rule WIDTHEXPAND -file "*/sim/tb_core_eq.v"
+
+// ---- UNUSEDSIGNAL / UNUSEDPARAM in rtl/chip (CHIP_FIX_PLAN task 10): NO file-wide waiver; each entry names one signal/parameter. ----
+// The dead declarations found by the verifier were deleted; what remains is unused only in some feature/geometry builds or is a reserved field.
+// rtl/chip/rondo_chip_top.v: documentation-only parameter; observation outputs that only the FPGA top / testbenches consume
+lint_off -rule UNUSEDSIGNAL -file "*rondo_chip_top.v" -match "*'cs_active'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_chip_top.v" -match "*'lclk_obs'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_chip_top.v" -match "*'F_CLK_HZ'*"
+// rtl/chip/rondo_cksum.v: function arguments of which only some bits are used (CRC/hash helper widths)
+lint_off -rule UNUSEDSIGNAL -file "*rondo_cksum.v" -match "*'t'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_cksum.v" -match "*'v'*"
+// rtl/chip/rondo_dbgmux.v: dbg_sel address bits above the selector width of the geometry
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dbgmux.v" -match "*'dbg_sel'*"
+// rtl/chip/rondo_dev.v: declared at module level but driven/used only inside feature generate blocks (TILE_P / TRACE / KAT / MBIST) or only by the build with that feature; reserved register bits
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'cmd_mbist_start'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'cmd_tile_abort'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'cmd_tile_run'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'h_tx_addr'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'h_tx_en'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'h_tx_we'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'h_tz_addr'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'h_tz_en'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'k_rsp_err_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'kat_mb_start'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'m_req_ready_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'m_rsp_err_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'m_rsp_rdata_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'m_rsp_valid_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'pk_busy'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_h_busy'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_h_rd'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_hf'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_host_wr_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_waddr_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_wd_h'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_wd_l'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ps_we_w'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'reg_irq_o'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'reg_status_o'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tile_cfg'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tile_slice'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tile_slice_wr'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_b'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_done_p'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_ent_tag'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_ent_valid'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_fail_p'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_s_cur'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_tx_addr'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_tx_en'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_tz_addr'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_tz_d'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_tz_we'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_xt_idx'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'tl_xt_we'*"
+// rtl/chip/rondo_kat.v: state-encoding constants and parameters kept for readability / present in every build, unused when the feature (MBIST, HAS_BF16) is absent
+lint_off -rule UNUSEDSIGNAL -file "*rondo_kat.v" -match "*'mbist_running_in'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_kat.v" -match "*'C_FSW'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_kat.v" -match "*'C_KAT'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_kat.v" -match "*'C_MB'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_kat.v" -match "*'E_HOLD'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_kat.v" -match "*'HAS_BF16'*"
+lint_off -rule UNUSEDPARAM -file "*rondo_kat.v" -match "*'XPW'*"
+// rtl/chip/rondo_layers.v: interface ports and wires used by only one datapath variant (HAS_BF16 / HAS_FP32 / LAYER=1 KAN / TILE / DBG / PG): unused in the builds without that variant
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'bm_q_h'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'bm_q_l'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'clk_en'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'core_rst_n'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'dbg_fmt'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'dbg_idx'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'dbg_lane'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'dbg_live_sel'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'dbg_sig'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'fmt'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'kw_addr'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'kw_din'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'kw_lane'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'kw_we'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'lane_en'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'pd_b'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'pg_iso'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'ps_q_h'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'ps_q_l'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'tile_last'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'tile_save'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'tile_seed'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'wm_q_h'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'wm_q_l'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_layers.v" -match "*'x'*"
+// rtl/chip/rondo_mbist.v: BAW kept in the common wrapper parameter list
+lint_off -rule UNUSEDPARAM -file "*rondo_mbist.v" -match "*'BAW'*"
+// rtl/chip/rondo_seq.v: observation / unused handshake outputs of submodules
+lint_off -rule UNUSEDSIGNAL -file "*rondo_seq.v" -match "*'ck_busy'*"
+// rtl/chip/rondo_spi_ctrl.v: rb_rsp_err (the response error is not turned into an SPI-level flag) and ntot (a leftover burst-length register, not read): harmless, candidates for removal
+lint_off -rule UNUSEDSIGNAL -file "*rondo_spi_ctrl.v" -match "*'ntot'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_spi_ctrl.v" -match "*'rb_rsp_err'*"
+// rtl/chip/rondo_spi_phy.v: shift-register MSB and a byte strobe that nothing in the chip reads
+lint_off -rule UNUSEDSIGNAL -file "*rondo_spi_phy.v" -match "*'byte_done'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_spi_phy.v" -match "*'rx_sh'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_spi_phy.v" -match "*'tx_sh'*"
+// rtl/chip/rondo_spi_slave.v: lb_mode is consumed inside the PHY
+lint_off -rule UNUSEDSIGNAL -file "*rondo_spi_slave.v" -match "*'lb_mode'*"
+// rtl/chip/rondo_tile.v: register bits above the field widths (TILE_CFG / TILE_SLICE reserved bits); tx_q consumed only in feature builds
+lint_off -rule UNUSEDSIGNAL -file "*rondo_tile.v" -match "*'cfg'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_tile.v" -match "*'slice_reg'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_tile.v" -match "*'tx_q'*"
+// rtl/chip/rondo_trace.v: cfg bits above the defined fields; physical-address MSB above the buffer depth
+lint_off -rule UNUSEDSIGNAL -file "*rondo_trace.v" -match "*'cfg'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_trace.v" -match "*'phys'*"
+// rtl/chip/rondo_wpack.v: BAW kept in the common wrapper parameter list
+lint_off -rule UNUSEDPARAM -file "*rondo_wpack.v" -match "*'BAW'*"
+// rondo_dev: wp_denied / ce_l_any are read only by the testbench SVA (tb_chip_vs_core.v hierarchical references)
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'wp_denied'*"
+lint_off -rule UNUSEDSIGNAL -file "*rondo_dev.v" -match "*'ce_l_any'*"

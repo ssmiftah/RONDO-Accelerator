@@ -1,0 +1,21 @@
+// DPI-C imports of rondo_fpmodel.c (scalar API). xelab: --sv_root <dir with dpi.so> --sv_lib dpi
+import "DPI-C" function int fpm_load_seed(input int sig, input int tbits, input string dir);
+import "DPI-C" function void fpm_cfg(input int width, input int pdim, input int depth, input int lanes, input int nslot, input int npar, input int nxbuf);
+import "DPI-C" function void fpm_set_w(input int lane, input int caddr, input int field, input longint unsigned bits);
+import "DPI-C" function void fpm_set_b(input int lane, input int caddr, input int field, input longint unsigned bits);
+import "DPI-C" function void fpm_set_x(input int i, input longint unsigned bits);
+import "DPI-C" function void fpm_run(input int is_fp32, input int accsig, input int tbits, input int nr, input int lane_mask);
+import "DPI-C" function void fpm_tile_slice(input int is_fp32, input int accsig, input int tbits, input int nr, input int lane_mask, input int first, input int last);
+import "DPI-C" function longint unsigned fpm_z(input int j);
+import "DPI-C" function int fpm_hit(input int j);
+import "DPI-C" function longint unsigned fpm_a(input int j, input int k);
+import "DPI-C" function longint unsigned fpm_acc(input int j, input int k);
+import "DPI-C" function longint unsigned fpm_k0(input int j);
+import "DPI-C" function longint unsigned fpm_k1(input int j);
+import "DPI-C" function int unsigned fpm_crc8(input int unsigned crc, input int unsigned b);
+import "DPI-C" function int unsigned fpm_crc32_update(input int unsigned crc, input int unsigned data, input int nbytes);
+import "DPI-C" function int unsigned fpm_cksum_update(input int unsigned cks, input int w);
+import "DPI-C" function int unsigned fpm_lfsr_next(input int unsigned s);
+import "DPI-C" function longint unsigned fpm_kat_element(input int unsigned r, input int w);
+import "DPI-C" function void fpm_set_w_logical(input int j, input int k, input int c, input longint unsigned bits);
+import "DPI-C" function void fpm_set_b_logical(input int j, input int k, input longint unsigned bits);

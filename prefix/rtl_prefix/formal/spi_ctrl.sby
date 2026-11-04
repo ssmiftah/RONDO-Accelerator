@@ -1,0 +1,23 @@
+# NOTE: bounded proof (BMC depth 64): k-induction needs invariants over rondo_spi_ctrl internals that the harness cannot name; see docs/CHIP_IMPL_LOG.md
+[tasks]
+prove
+cover
+
+[options]
+prove: mode bmc
+prove: depth 64
+cover: mode cover
+cover: depth 110
+
+[engines]
+smtbmc yices
+
+[script]
+prove: read_verilog -sv -formal -DFORMAL spi_ctrl_f.v rondo_spi_ctrl.v
+cover: read_verilog -sv -formal -DFORMAL -DGAPN=6 spi_ctrl_f.v rondo_spi_ctrl.v
+prep -top spi_ctrl_f
+async2sync
+
+[files]
+spi_ctrl_f.v
+../rtl/chip/rondo_spi_ctrl.v

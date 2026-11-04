@@ -1,0 +1,450 @@
+{
+ "tests": [
+  {
+   "test": "u_bringup",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ],
+    [
+     "DEV",
+     "S_MIN"
+    ],
+    [
+     "CHIP",
+     "S_MIN"
+    ],
+    [
+     "DEV",
+     "F"
+    ]
+   ]
+  },
+  {
+   "test": "u_caps",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "DEV",
+     "S_MIN"
+    ],
+    [
+     "DEV",
+     "S_KAN"
+    ],
+    [
+     "DEV",
+     "S_MB"
+    ],
+    [
+     "DEV",
+     "S_SCAN_PG"
+    ],
+    [
+     "DEV",
+     "S_ACC24"
+    ]
+   ]
+  },
+  {
+   "test": "u_reg_access",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ],
+    [
+     "DEV",
+     "S_MIN"
+    ]
+   ]
+  },
+  {
+   "test": "u_load_crc",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ],
+    [
+     "DEV",
+     "S_TB2"
+    ]
+   ]
+  },
+  {
+   "test": "u_infer_bf16",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ],
+    [
+     "DEV",
+     "F"
+    ],
+    [
+     "DEV",
+     "S_ACC24"
+    ]
+   ]
+  },
+  {
+   "test": "u_infer_fp32",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "DEV",
+     "F"
+    ]
+   ]
+  },
+  {
+   "test": "u_infer_rand",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ],
+   "args": [
+    "NROUNDS=40"
+   ]
+  },
+  {
+   "test": "u_lane_mask",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "DEV",
+     "F"
+    ]
+   ]
+  },
+  {
+   "test": "u_selfrun",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_counters",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "DEV",
+     "S_CNT"
+    ]
+   ]
+  },
+  {
+   "test": "u_fmt_switch",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_soft_reset",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_kat_reg",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "DEV",
+     "F"
+    ]
+   ]
+  },
+  {
+   "test": "u_kat_strap",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_mbist_clean",
+   "runs": [
+    [
+     "DEV",
+     "S_MB"
+    ]
+   ]
+  },
+  {
+   "test": "u_b2_kat_pwr",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_tile_basic",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "DEV",
+     "S_TB2"
+    ]
+   ]
+  },
+  {
+   "test": "u_tile_keep",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_b1_keep_corehold",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_err_all",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_spi_proto",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_spi_abort",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_spi_r6",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_clk_div",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_clk_src",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_clkout",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_reset_async",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_chip_rand",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ],
+   "args": [
+    "NOPS=60"
+   ]
+  },
+  {
+   "test": "u_b4_host_replay",
+   "runs": [
+    [
+     "CHIP",
+     "S"
+    ]
+   ],
+   "args": [
+    "B4_LOG=@ROOT@/build/verif/b4_@HOSTTAG@.log"
+   ]
+  },
+  {
+   "test": "u_ctrl_combos",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  },
+  {
+   "test": "u_neg_ref",
+   "runs": [
+    [
+     "DEV",
+     "S"
+    ],
+    [
+     "CHIP",
+     "S"
+    ]
+   ]
+  }
+ ],
+ "tiers": {
+  "smoke": {
+   "seeds": [
+    1
+   ],
+   "only": [
+    "u_bringup",
+    "u_reg_access",
+    "u_infer_bf16",
+    "u_infer_fp32"
+   ],
+   "cfgs": [
+    "S"
+   ],
+   "tops": [
+    "DEV"
+   ]
+  },
+  "nightly": {
+   "seeds": [
+    1,
+    2,
+    3
+   ],
+   "skip_cfgs": [
+    "F"
+   ]
+  },
+  "signoff": {
+   "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  }
+ }
+}

@@ -1,0 +1,24 @@
+# NOTE: BMC depth 70 (k-induction would need invariants over rondo_seq internal state; see docs/CHIP_IMPL_LOG.md)
+[tasks]
+bmc
+cover
+
+[options]
+bmc: mode bmc
+bmc: depth 70
+cover: mode cover
+cover: depth 70
+
+[engines]
+smtbmc yices
+
+[script]
+read_verilog -sv -formal -DFORMAL seq_f.v rondo_seq.v rondo_cksum.v rondo_sva_seq.v
+prep -top seq_f
+async2sync
+
+[files]
+seq_f.v
+../rtl/chip/rondo_seq.v
+../rtl/chip/rondo_cksum.v
+../rtl/chip/sva/rondo_sva_seq.v

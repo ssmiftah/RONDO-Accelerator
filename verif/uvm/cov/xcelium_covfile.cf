@@ -1,0 +1,4 @@
+// Xcelium coverage configuration (UNTESTED here). Scope: the device RTL; HardFloat/FMA datapath, testbench, interfaces and the bound checkers are excluded.
+select_coverage -block -expr -toggle -fsm -module rondo_*
+deselect_coverage -module fp_fma_pipe -module fused_coproc_pipe -module affine_bank_pipe -module ladder_scan_inter -module recip_nr_pipe -module ladder_engine_inter -module kan_* -module rondo_sva_*
+deselect_coverage -betsoft -module rondo_sram_sp

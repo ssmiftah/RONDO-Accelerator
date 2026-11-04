@@ -1,0 +1,782 @@
+
+ Xcrg Functional Coverage Report 
+
+ // To generate a more detailed report in html format, please run xcrg -dir <database> -report_format html -report_dir <dir>
+ // This is a text report also in CSV format. By exporting to Excel and using , as the delimiter, the data can be split into individual rows and columns
+ // This report contains 3 sections, Total Summary, CoverGroups Summary and CoverPoint Tables sections 
+ // In order to navigate to a CoverPoint's Table, the TableTag printed for the respective covergroup/instance can be grepped in this report
+ // For example, if covergroup name is g1 and coverpoint is cp1, the TableTag to go to the Group's CoverPoint Table summary is g1_cp1 
+ // For example, if covergroup name is g1, instance name is i1, coverpoint is cp1, the TableTag to go to the Instance's CoverPoint Table summary is g1_i1_cp1 
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Total Summary ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+   Date             :, Tue Nov  3 14:30:48 2026 EST
+   User             :, samit
+   Version          :, Vivado Simulator Coverage Report 2025.2
+   Command Line     :, /home/CAD/2025.2/Vivado/bin/unwrapped/lnx64.o/xcrg -cov_db_dir /home/samit/PhD/Projects/IBM_CoFrNets/CoFrNet-RPI-main/build/verif/covall -report_format text -report_dir /home/samit/PhD/Projects/IBM_CoFrNets/CoFrNet-RPI-main/build/verif/covrep/all 
+   Number of Tests  :, 1
+
+   Coverage Score            :, 100
+   Total Insts Score         :, 100
+   Total no of Cover Groups  :, 6
+   Total no of Instances     :, 6
+
+
+     CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+       rondo_pkg::rondo_cov::reg_cg                      ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+       rondo_pkg::rondo_cov::err_cg                      ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+       rondo_pkg::rondo_cov::ctrl_cg                     ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+       rondo_pkg::rondo_cov::dp_cg                       ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+       rondo_pkg::rondo_cov::load_cg                     ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+       rondo_pkg::rondo_cov::fmt_cg                      ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: CoverGroups Summary ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Cover Group Details : rondo_pkg::rondo_cov::reg_cg
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+rondo_pkg::rondo_cov::reg_cg                      ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - rondo_pkg::rondo_cov::reg_cg
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             	his .reg_cg                                      ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance 	his .reg_cg Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             idx                                               ,reg_cg_	his .reg_cg_idx,56          ,0           ,56          ,100         ,100         ,1           ,1           ,64          ,            ,
+             op                                                ,reg_cg_	his .reg_cg_op,2           ,0           ,2           ,100         ,100         ,1           ,1           ,64          ,            ,
+             out                                               ,reg_cg_	his .reg_cg_out,7           ,0           ,7           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+      Instance 	his .reg_cg Cross Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    Comment,    
+             op_out                                            ,reg_cg_	his .reg_cg_op_out,9           ,0           ,9           ,100         ,100         ,1           ,1           ,            ,
+
+
+
+
+
+
+
+
+Cover Group Details : rondo_pkg::rondo_cov::err_cg
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+rondo_pkg::rondo_cov::err_cg                      ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - rondo_pkg::rondo_cov::err_cg
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             	his .err_cg                                      ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance 	his .err_cg Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             e                                                 ,err_cg_	his .err_cg_e,6           ,0           ,6           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+
+
+
+
+
+
+Cover Group Details : rondo_pkg::rondo_cov::ctrl_cg
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+rondo_pkg::rondo_cov::ctrl_cg                     ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - rondo_pkg::rondo_cov::ctrl_cg
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             	his .ctrl_cg                                     ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance 	his .ctrl_cg Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             bit_c                                             ,ctrl_cg_	his .ctrl_cg_bit_c,15          ,0           ,15          ,100         ,100         ,1           ,1           ,64          ,            ,
+             st                                                ,ctrl_cg_	his .ctrl_cg_st,3           ,0           ,3           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+      Instance 	his .ctrl_cg Cross Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    Comment,    
+             x                                                 ,ctrl_cg_	his .ctrl_cg_x,45          ,0           ,45          ,100         ,100         ,1           ,1           ,            ,
+
+
+
+
+
+
+
+
+Cover Group Details : rondo_pkg::rondo_cov::dp_cg
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+rondo_pkg::rondo_cov::dp_cg                       ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - rondo_pkg::rondo_cov::dp_cg
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             	his .dp_cg                                       ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance 	his .dp_cg Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             f                                                 ,dp_cg_	his .dp_cg_f,2           ,0           ,2           ,100         ,100         ,1           ,1           ,64          ,            ,
+             ln                                                ,dp_cg_	his .dp_cg_ln,4           ,0           ,4           ,100         ,100         ,1           ,1           ,64          ,            ,
+             sr                                                ,dp_cg_	his .dp_cg_sr,2           ,0           ,2           ,100         ,100         ,1           ,1           ,64          ,            ,
+             en                                                ,dp_cg_	his .dp_cg_en,4           ,0           ,4           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+      Instance 	his .dp_cg Cross Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    Comment,    
+             fxl                                               ,dp_cg_	his .dp_cg_fxl,8           ,0           ,8           ,100         ,100         ,1           ,1           ,            ,
+             fxs                                               ,dp_cg_	his .dp_cg_fxs,4           ,0           ,4           ,100         ,100         ,1           ,1           ,            ,
+
+
+
+
+
+
+
+
+Cover Group Details : rondo_pkg::rondo_cov::load_cg
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+rondo_pkg::rondo_cov::load_cg                     ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - rondo_pkg::rondo_cov::load_cg
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             	his .load_cg                                     ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance 	his .load_cg Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             reg_                                              ,load_cg_	his .load_cg_reg_,6           ,0           ,6           ,100         ,100         ,1           ,1           ,64          ,            ,
+             f                                                 ,load_cg_	his .load_cg_f,2           ,0           ,2           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+      Instance 	his .load_cg Cross Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    Comment,    
+             rx                                                ,load_cg_	his .load_cg_rx,12          ,0           ,12          ,100         ,100         ,1           ,1           ,            ,
+
+
+
+
+
+
+
+
+Cover Group Details : rondo_pkg::rondo_cov::fmt_cg
+
+CgName,                                           Score,      NumInsts,   AvgInstScore,   Weight,     Goal,       Merge Insts,    Get Inst Cov,   Per Inst,   AutoBinMax,     Comment,    
+
+rondo_pkg::rondo_cov::fmt_cg                      ,100         ,1           ,100             ,1           ,100         ,0               ,0               ,0           ,64              ,            ,
+
+      Instances of CoverGroup - rondo_pkg::rondo_cov::fmt_cg
+
+             InstName,                                         Score,      Weight,     Goal,       AtLeast,    AutoBinMax, PrintMissing,   IsInst,     Comment,    
+             	his .fmt_cg                                      ,100         ,1           ,100         ,1           ,64          ,0               ,1           ,            ,
+
+
+      Instance 	his .fmt_cg Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    AutoBinMax, Comment,    
+             t                                                 ,fmt_cg_	his .fmt_cg_t,4           ,0           ,4           ,100         ,100         ,1           ,1           ,64          ,            ,
+             r                                                 ,fmt_cg_	his .fmt_cg_r,2           ,0           ,2           ,100         ,100         ,1           ,1           ,64          ,            ,
+
+
+      Instance 	his .fmt_cg Cross Cover Point Details 
+
+             Name,                                             TableTag,     Expected,   Uncovered,  Covered,    Percent,    Goal,       Weight,     AtLeast,    Comment,    
+             x                                                 ,fmt_cg_	his .fmt_cg_x,8           ,0           ,8           ,100         ,100         ,1           ,1           ,            ,
+
+
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: CoverPoint Tables::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+ Cover Point Table for Inst : 	his .reg_cg, Variable :, idx
+ Table tag :, reg_cg_	his .reg_cg_idx
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   56          ,0           ,56          ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      ident_0     ,227         ,1           ,
+      ident_1     ,163         ,1           ,
+      ident_2     ,159         ,1           ,
+      ident_3     ,112         ,1           ,
+      ident_4     ,141         ,1           ,
+      ident_5     ,120         ,1           ,
+      ident_6     ,146         ,1           ,
+      ident_7     ,127         ,1           ,
+      ident_8     ,130         ,1           ,
+      ident_9     ,1161        ,1           ,
+      ident_10    ,2876        ,1           ,
+      ident_11    ,54014       ,1           ,
+      ident_12    ,1669        ,1           ,
+      ident_13    ,233         ,1           ,
+      ident_14    ,4153        ,1           ,
+      ident_15    ,384         ,1           ,
+      ident_16    ,570         ,1           ,
+      ident_17    ,1409        ,1           ,
+      ident_18    ,614         ,1           ,
+      ident_19    ,584         ,1           ,
+      ident_20    ,287         ,1           ,
+      ident_21    ,738         ,1           ,
+      ident_22    ,220         ,1           ,
+      ident_23    ,321         ,1           ,
+      ident_24    ,464         ,1           ,
+      ident_25    ,385         ,1           ,
+      ident_32    ,413         ,1           ,
+      ident_33    ,476         ,1           ,
+      ident_34    ,350         ,1           ,
+      ident_35    ,11          ,1           ,
+      ident_36    ,11          ,1           ,
+      ident_37    ,21          ,1           ,
+      ident_38    ,22          ,1           ,
+      ident_39    ,181         ,1           ,
+      ident_40    ,180         ,1           ,
+      ident_41    ,281         ,1           ,
+      ident_42    ,555         ,1           ,
+      ident_43    ,180         ,1           ,
+      ident_44    ,613         ,1           ,
+      ident_45    ,539         ,1           ,
+      ident_46    ,410         ,1           ,
+      ident_48    ,324         ,1           ,
+      ident_49    ,5           ,1           ,
+      ident_56    ,267         ,1           ,
+      ident_57    ,255         ,1           ,
+      ident_58    ,120         ,1           ,
+      ident_64    ,194         ,1           ,
+      ident_65    ,10          ,1           ,
+      ident_66    ,12          ,1           ,
+      ident_67    ,15          ,1           ,
+      ident_68    ,15          ,1           ,
+      ident_80    ,210         ,1           ,
+      ident_81    ,454         ,1           ,
+      ident_82    ,214         ,1           ,
+      ident_83    ,108         ,1           ,
+      ident_84    ,273         ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .reg_cg, Variable :, op
+ Table tag :, reg_cg_	his .reg_cg_op
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   2           ,0           ,2           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      rd          ,65854       ,1           ,
+      wr          ,13314       ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .reg_cg, Variable :, out
+ Table tag :, reg_cg_	his .reg_cg_out
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   7           ,0           ,7           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      ok          ,76433       ,1           ,
+      addr        ,1274        ,1           ,
+      ro          ,870         ,1           ,
+      busy_wr     ,65          ,1           ,
+      range       ,190         ,1           ,
+      tile_seq    ,186         ,1           ,
+      start_busy  ,150         ,1           ,
+
+
+
+
+
+
+ Cross Cover Point Table for Inst : 	his .reg_cg, Variable :, op_out
+ Table tag :, reg_cg_	his .reg_cg_op_out
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ Total,          9           ,0           ,9           ,100         ,
+ Automatic,      9           ,0           ,9           ,1           ,
+
+                 Auto Covered bins 
+
+      op              ,out             ,Hit Count,  AtLeast,    
+      rd              ,ok              ,65378       ,1           ,
+      rd              ,addr            ,476         ,1           ,
+      wr              ,ok              ,11055       ,1           ,
+      wr              ,addr            ,798         ,1           ,
+      wr              ,ro              ,870         ,1           ,
+      wr              ,busy_wr         ,65          ,1           ,
+      wr              ,range           ,190         ,1           ,
+      wr              ,tile_seq        ,186         ,1           ,
+      wr              ,start_busy      ,150         ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .err_cg, Variable :, e
+ Table tag :, err_cg_	his .err_cg_e
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   6           ,0           ,6           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      busy_wr     ,65          ,1           ,
+      addr        ,1274        ,1           ,
+      ro          ,870         ,1           ,
+      start_busy  ,150         ,1           ,
+      range       ,190         ,1           ,
+      tile_seq    ,176         ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .ctrl_cg, Variable :, bit_c
+ Table tag :, ctrl_cg_	his .ctrl_cg_bit_c
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   15          ,0           ,15          ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      start_cmd   ,1104        ,1           ,
+      soft_rst    ,121         ,1           ,
+      sr_start    ,316         ,1           ,
+      sr_stop     ,70          ,1           ,
+      cnt_clr     ,215         ,1           ,
+      cksum_clr   ,35          ,1           ,
+      crc_clr     ,385         ,1           ,
+      kat         ,65          ,1           ,
+      mbist       ,25          ,1           ,
+      trc         ,50          ,1           ,
+      dbg         ,25          ,1           ,
+      guard       ,35          ,1           ,
+      tile_run    ,335         ,1           ,
+      tile_abort  ,25          ,1           ,
+      multi       ,70          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .ctrl_cg, Variable :, st
+ Table tag :, ctrl_cg_	his .ctrl_cg_st
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   3           ,0           ,3           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      idle        ,2196        ,1           ,
+      active      ,130         ,1           ,
+      open        ,550         ,1           ,
+
+
+
+
+
+
+ Cross Cover Point Table for Inst : 	his .ctrl_cg, Variable :, x
+ Table tag :, ctrl_cg_	his .ctrl_cg_x
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ Total,          45          ,0           ,45          ,100         ,
+ Automatic,      45          ,0           ,45          ,1           ,
+
+                 Auto Covered bins 
+
+      bit_c           ,st              ,Hit Count,  AtLeast,    
+      start_cmd       ,idle            ,1084        ,1           ,
+      start_cmd       ,active          ,10          ,1           ,
+      start_cmd       ,open            ,10          ,1           ,
+      soft_rst        ,idle            ,86          ,1           ,
+      soft_rst        ,active          ,25          ,1           ,
+      soft_rst        ,open            ,10          ,1           ,
+      sr_start        ,idle            ,301         ,1           ,
+      sr_start        ,active          ,5           ,1           ,
+      sr_start        ,open            ,10          ,1           ,
+      sr_stop         ,idle            ,30          ,1           ,
+      sr_stop         ,active          ,30          ,1           ,
+      sr_stop         ,open            ,10          ,1           ,
+      cnt_clr         ,idle            ,200         ,1           ,
+      cnt_clr         ,active          ,5           ,1           ,
+      cnt_clr         ,open            ,10          ,1           ,
+      cksum_clr       ,idle            ,20          ,1           ,
+      cksum_clr       ,active          ,5           ,1           ,
+      cksum_clr       ,open            ,10          ,1           ,
+      crc_clr         ,idle            ,170         ,1           ,
+      crc_clr         ,active          ,5           ,1           ,
+      crc_clr         ,open            ,210         ,1           ,
+      kat             ,idle            ,50          ,1           ,
+      kat             ,active          ,5           ,1           ,
+      kat             ,open            ,10          ,1           ,
+      mbist           ,idle            ,10          ,1           ,
+      mbist           ,active          ,5           ,1           ,
+      mbist           ,open            ,10          ,1           ,
+      trc             ,idle            ,20          ,1           ,
+      trc             ,active          ,10          ,1           ,
+      trc             ,open            ,20          ,1           ,
+      dbg             ,idle            ,10          ,1           ,
+      dbg             ,active          ,5           ,1           ,
+      dbg             ,open            ,10          ,1           ,
+      guard           ,idle            ,20          ,1           ,
+      guard           ,active          ,5           ,1           ,
+      guard           ,open            ,10          ,1           ,
+      tile_run        ,idle            ,130         ,1           ,
+      tile_run        ,active          ,5           ,1           ,
+      tile_run        ,open            ,200         ,1           ,
+      tile_abort      ,idle            ,10          ,1           ,
+      tile_abort      ,active          ,5           ,1           ,
+      tile_abort      ,open            ,10          ,1           ,
+      multi           ,idle            ,55          ,1           ,
+      multi           ,active          ,5           ,1           ,
+      multi           ,open            ,10          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .dp_cg, Variable :, f
+ Table tag :, dp_cg_	his .dp_cg_f
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   2           ,0           ,2           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      bf16        ,1556        ,1           ,
+      fp32        ,1188        ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .dp_cg, Variable :, ln
+ Table tag :, dp_cg_	his .dp_cg_ln
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   4           ,0           ,4           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      all         ,2489        ,1           ,
+      none        ,24          ,1           ,
+      single      ,221         ,1           ,
+      partial     ,10          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .dp_cg, Variable :, sr
+ Table tag :, dp_cg_	his .dp_cg_sr
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   2           ,0           ,2           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      single      ,1462        ,1           ,
+      selfrun     ,1282        ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .dp_cg, Variable :, en
+ Table tag :, dp_cg_	his .dp_cg_en
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   4           ,0           ,4           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      e0          ,1702        ,1           ,
+      e1          ,541         ,1           ,
+      e2          ,260         ,1           ,
+      e3          ,241         ,1           ,
+
+
+
+
+
+
+ Cross Cover Point Table for Inst : 	his .dp_cg, Variable :, fxl
+ Table tag :, dp_cg_	his .dp_cg_fxl
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ Total,          8           ,0           ,8           ,100         ,
+ Automatic,      8           ,0           ,8           ,1           ,
+
+                 Auto Covered bins 
+
+      f               ,ln              ,Hit Count,  AtLeast,    
+      bf16            ,all             ,1431        ,1           ,
+      bf16            ,none            ,12          ,1           ,
+      bf16            ,single          ,108         ,1           ,
+      bf16            ,partial         ,5           ,1           ,
+      fp32            ,all             ,1058        ,1           ,
+      fp32            ,none            ,12          ,1           ,
+      fp32            ,single          ,113         ,1           ,
+      fp32            ,partial         ,5           ,1           ,
+
+
+
+
+
+
+ Cross Cover Point Table for Inst : 	his .dp_cg, Variable :, fxl
+ Table tag :, dp_cg_	his .dp_cg_fxl
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ Total,          8           ,0           ,8           ,100         ,
+ Automatic,      8           ,0           ,8           ,1           ,
+
+                 Auto Covered bins 
+
+      f               ,ln              ,Hit Count,  AtLeast,    
+      bf16            ,all             ,1431        ,1           ,
+      bf16            ,none            ,12          ,1           ,
+      bf16            ,single          ,108         ,1           ,
+      bf16            ,partial         ,5           ,1           ,
+      fp32            ,all             ,1058        ,1           ,
+      fp32            ,none            ,12          ,1           ,
+      fp32            ,single          ,113         ,1           ,
+      fp32            ,partial         ,5           ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .load_cg, Variable :, reg_
+ Table tag :, load_cg_	his .load_cg_reg_
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   6           ,0           ,6           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      w           ,1043254     ,1           ,
+      b           ,94928       ,1           ,
+      x           ,11777       ,1           ,
+      tx          ,2960        ,1           ,
+      ps          ,100         ,1           ,
+      z           ,19024       ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .load_cg, Variable :, f
+ Table tag :, load_cg_	his .load_cg_f
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   2           ,0           ,2           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      bf16        ,625507      ,1           ,
+      fp32        ,546536      ,1           ,
+
+
+
+
+
+
+ Cross Cover Point Table for Inst : 	his .load_cg, Variable :, rx
+ Table tag :, load_cg_	his .load_cg_rx
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ Total,          12          ,0           ,12          ,100         ,
+ Automatic,      12          ,0           ,12          ,1           ,
+
+                 Auto Covered bins 
+
+      reg_            ,f               ,Hit Count,  AtLeast,    
+      w               ,bf16            ,556006      ,1           ,
+      w               ,fp32            ,487248      ,1           ,
+      b               ,bf16            ,51552       ,1           ,
+      b               ,fp32            ,43376       ,1           ,
+      x               ,bf16            ,6561        ,1           ,
+      x               ,fp32            ,5216        ,1           ,
+      tx              ,bf16            ,1520        ,1           ,
+      tx              ,fp32            ,1440        ,1           ,
+      ps              ,bf16            ,60          ,1           ,
+      ps              ,fp32            ,40          ,1           ,
+      z               ,bf16            ,9808        ,1           ,
+      z               ,fp32            ,9216        ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .fmt_cg, Variable :, t
+ Table tag :, fmt_cg_	his .fmt_cg_t
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   4           ,0           ,4           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      b2f         ,188         ,1           ,
+      f2b         ,71          ,1           ,
+      b2b         ,222         ,1           ,
+      f2f         ,54          ,1           ,
+
+
+
+
+
+
+ Cover Point Table for Inst : 	his .fmt_cg, Variable :, r
+ Table tag :, fmt_cg_	his .fmt_cg_r
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ UserDefined,   2           ,0           ,2           ,100         ,
+
+                     Covered bins 
+
+      Name,       Hit Count,  AtLeast,    
+      accepted    ,490         ,1           ,
+      while_active,45          ,1           ,
+
+
+
+
+
+
+ Cross Cover Point Table for Inst : 	his .fmt_cg, Variable :, x
+ Table tag :, fmt_cg_	his .fmt_cg_x
+
+                      Summary 
+
+ Category,       Expected,   Uncovered,  Covered,    Percent,    
+ Total,          8           ,0           ,8           ,100         ,
+ Automatic,      8           ,0           ,8           ,1           ,
+
+                 Auto Covered bins 
+
+      t               ,r               ,Hit Count,  AtLeast,    
+      b2f             ,accepted        ,173         ,1           ,
+      b2f             ,while_active    ,15          ,1           ,
+      f2b             ,accepted        ,61          ,1           ,
+      f2b             ,while_active    ,10          ,1           ,
+      b2b             ,accepted        ,212         ,1           ,
+      b2b             ,while_active    ,10          ,1           ,
+      f2f             ,accepted        ,44          ,1           ,
+      f2f             ,while_active    ,10          ,1           ,
+
+
+
+
+
+

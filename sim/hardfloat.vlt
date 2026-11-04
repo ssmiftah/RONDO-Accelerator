@@ -1,0 +1,13 @@
+// Lint waiver for the vendored third-party Berkeley HardFloat IP.
+//
+// HardFloat intentionally uses width-narrowing assignments (e.g. dropping known
+// MSBs of an exponent) and other constructs that trip the default, fatal lint.
+// This is the verified upstream release (John Hauser, BSD); we do not modify it
+// for style. Waive lint ONLY for those files so that our own continuant-
+// coprocessor RTL stays under strict checking -- a real width/latch/unopt issue
+// in *our* code will still be reported as fatal.
+//
+// (Comments here deliberately avoid starting a line with the tool's name, which
+// the .vlt parser would otherwise treat as an inline pragma.)
+`verilator_config
+lint_off -file "*/third_party/HardFloat/*"

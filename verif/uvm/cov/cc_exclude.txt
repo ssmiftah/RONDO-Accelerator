@@ -1,0 +1,7 @@
+# Code-coverage scope for rtl/chip (xsim --cc_type sbct). One justification per exclusion. The report is filtered with these module names (reports/cov_code_modules.md).
+EXCLUDE rondo_sva_*        bound checkers, not design logic
+EXCLUDE fp_fma_pipe, fused_coproc_pipe, affine_bank_pipe, ladder_scan_inter, recip_nr_pipe, ladder_engine_inter, kan_*   datapath: bit-exactness is checked against the C model, not by structural coverage
+EXCLUDE HardFloat modules  vendored IP
+EXCLUDE rondo_sram_sp      behavioral macro stand-in
+EXCLUDE rondo_mbist, rondo_trace (partially) not exercised in the S build / not part of this round (see SIGNOFF)
+EXCLUDE ifdef RONDO_FAULT_INJECT / FORMAL / test_mode branches  need other builds (S_SCAN_PG, fault injection)

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+obj_dir/
+*.vcd
+*.fst
+*.log
