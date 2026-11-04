@@ -1,0 +1,39 @@
+# NOTE: BMC (depth 60): the harness is rondo_dev with the layers abstracted (formal/rondo_layers_abs.v).
+[tasks]
+bmc
+cover
+
+[options]
+bmc: mode bmc
+bmc: depth 60
+cover: mode cover
+cover: depth 60
+
+[engines]
+smtbmc yices
+
+[script]
+read_verilog -sv -formal -DFORMAL dev_bus_f.v rondo_layers_abs.v rondo_dev.v rondo_tile.v rondo_tbuf.v rondo_ps.v rondo_regs.v rondo_seq.v rondo_cksum.v rondo_wmem.v rondo_wpack.v rondo_sram_sp.v rondo_rbus_arb.v rondo_dbgmux.v rondo_trace.v rondo_kat.v rondo_sva_rbus.v rondo_sva_seq.v
+prep -top dev_bus_f
+async2sync
+
+[files]
+dev_bus_f.v
+rondo_layers_abs.v
+../rtl/chip/rondo_dev.v
+../rtl/chip/rondo_tile.v
+../rtl/chip/rondo_tbuf.v
+../rtl/chip/rondo_ps.v
+../rtl/chip/rondo_regs.v
+../rtl/chip/rondo_seq.v
+../rtl/chip/rondo_cksum.v
+../rtl/chip/rondo_wmem.v
+../rtl/chip/rondo_wpack.v
+../rtl/chip/rondo_sram_sp.v
+../rtl/chip/rondo_rbus_arb.v
+../rtl/chip/rondo_dbgmux.v
+../rtl/chip/rondo_trace.v
+../rtl/chip/rondo_kat.v
+../rtl/chip/rondo_kat_sigs.vh
+../rtl/chip/sva/rondo_sva_rbus.v
+../rtl/chip/sva/rondo_sva_seq.v

@@ -1,0 +1,52 @@
+# spi_ctrl: bounded model checking at a SOUND byte-spacing abstraction, plus cover and a vacuity mutant (CHIP_FIX_PLAN task 5, finding F1).
+# This is BMC (bounded, depth 34 / 28), not an unbounded proof.
+#
+# Byte-spacing abstraction (spi_ctrl_f.v): rx_valid is admitted only when `gap == GAPN`, i.e. bytes are at least GAPN+1 cycles apart. The
+# real PHY delivers one byte per 8 SCLK periods = 8*R >= 48 core cycles (R >= 6, the verified corner). Any GAPN <= 47 is therefore an
+# over-approximation of the real PHY (a smaller GAPN admits strictly more behaviors), so a property that holds at GAPN = g holds for every
+# real spacing >= g+1. The BMC tasks use GAPN = 2 (3 cycles per byte; the smallest value that keeps the rbus handshake legal).
+#
+# Deviation from the plan (recorded in docs/CHIP_IMPL_LOG.md): the plan asked for one configuration at GAPN 4, depth 160. That instance is not
+# solvable here: yices (also z3 and abc bmc3) slow down about 2x per step from step ~35 on, whatever the abstraction (CRC off, payload zeroed,
+# header constant), and abc pdr returns UNKNOWN. What was done instead:
+#  * bmc_nocrc: depth 34 at GAPN 2, CRC off. Reaches the first write word and its rbus write request (a request is issued at step 31, see the mutant).
+#  * bmc_crc:   depth 28 at GAPN 2, CRC on: header incl. HCRC, accept/reject; the CRC-on WRITE path (data word + DCRC) is NOT reached by the BMC.
+#  * SPI_F_DATA0 zeroes the payload bytes after the header (except the per-word CRC byte of a CRC-on write): the controller's control flow
+#    does not depend on payload values.
+#  * cover: depth 160 at GAPN 4, CRC free, payload free: all covers (2nd/3rd write word with CRC on and off, 2nd and last read, HCRC and DCRC
+#    reject, frame end after >= 2 words, mid-word abort) are reached (last at step 111); cheap (about 4 min). Not part of the bmc depth rule.
+#  * mutant_nocrc: the bmc_nocrc configuration plus a deliberately false assertion on the FIRST write word; must FAIL (it does, at step 31), which
+#    proves that the write-path assertions are exercised by the bmc_nocrc job (the old depth-64/GAPN-8 job could not reach any write request).
+# The remaining gap (CRC-on write words, more than one word of a burst) is covered by simulation only: T-SPI (6 ratios x 200 random frames).
+# expect-fail: mutant_nocrc
+# cover-exempt: cover
+[tasks]
+bmc_nocrc
+bmc_crc
+cover
+mutant_nocrc
+
+[options]
+bmc_nocrc: mode bmc
+bmc_nocrc: depth 34
+bmc_crc: mode bmc
+bmc_crc: depth 28
+cover: mode cover
+cover: depth 160
+mutant_nocrc: mode bmc
+mutant_nocrc: depth 34
+
+[engines]
+smtbmc yices
+
+[script]
+bmc_nocrc: read_verilog -sv -formal -DFORMAL -DGAPN=2 -DSPI_F_CRC=0 -DSPI_F_DATA0 spi_ctrl_f.v rondo_spi_ctrl.v
+bmc_crc: read_verilog -sv -formal -DFORMAL -DGAPN=2 -DSPI_F_CRC=1 -DSPI_F_DATA0 spi_ctrl_f.v rondo_spi_ctrl.v
+cover: read_verilog -sv -formal -DFORMAL -DGAPN=4 spi_ctrl_f.v rondo_spi_ctrl.v
+mutant_nocrc: read_verilog -sv -formal -DFORMAL -DGAPN=2 -DSPI_F_CRC=0 -DSPI_F_DATA0 -DSPI_F_MUTANT spi_ctrl_f.v rondo_spi_ctrl.v
+prep -top spi_ctrl_f
+async2sync
+
+[files]
+spi_ctrl_f.v
+../rtl/chip/rondo_spi_ctrl.v

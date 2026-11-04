@@ -1,0 +1,22 @@
+[tasks]
+prove
+cover
+
+[options]
+prove: mode prove
+prove: depth 12
+cover: mode cover
+cover: depth 16
+
+[engines]
+smtbmc yices
+
+[script]
+read_verilog -sv -formal -DFORMAL regs_f.v rondo_regs.v rondo_sva_regs.v
+prep -top regs_f
+async2sync
+
+[files]
+regs_f.v
+../rtl/chip/rondo_regs.v
+../rtl/chip/sva/rondo_sva_regs.v
